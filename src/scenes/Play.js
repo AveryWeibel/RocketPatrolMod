@@ -56,18 +56,60 @@ class Play extends Phaser.Scene {
             }),
             frameRate: 30
         });
-    }
+
+        //init score
+        this.p1score = 0;
+
+        //Display score
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,                
+            },
+            fixedWidth: 100
+        }
+
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1score, scoreConfig);
+
+        //GAMEOVER flag
+        this.gameOver = false;
+
+        // clock
+        this.gameLen = 60; //Game length in seconds
+
+        scoreConfig.fixedWidth = 0;
+        this.clock = this.time.delayedCall(game.settings.gameTimer * 1000, () => {
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or (<-) for Menu', scoreConfig).setOrigin(0.5);
+            this.gameOver = true;
+        }, null, this);
+
+    } //End create()
 
     update(time, delta) {
         let deltaMultiplier = (delta/16.66667);
         this.starfield.tilePositionX -= starSpeed * deltaMultiplier;
 
-        // update rocket
-        this.p1Rocket.update(time, delta);
-        //Update Spaceship
-        this.ship01.update(time, delta);
-        this.ship02.update(time, delta);
-        this.ship03.update(time, delta);
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
+            this.scene.restart();
+        }
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start("menuScene");
+        }
+
+        if(!this.gameOver) {
+            // update rocket
+            this.p1Rocket.update(time, delta);
+            //Update Spaceship
+            this.ship01.update(time, delta);
+            this.ship02.update(time, delta);
+            this.ship03.update(time, delta);
+        }
 
         //CheckCollision
         if(this.checkCollision(this.p1Rocket, this.ship01)){
@@ -108,7 +150,10 @@ class Play extends Phaser.Scene {
             ship.alpha = 1;
             shipExplosion.destroy();
         });
+        //Do sscoring for hit
+        this.p1score += ship.points;
+        this.scoreLeft.text = this.p1score;
 
-
+        this.sound.play('sfx_explosion');
     }
 }

@@ -3,7 +3,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this); //Add to existing scene
         this.points = pointValue; //Store instance pointvalue
-        this.moveSpeed = 3;       //Gaming
+        this.moveSpeed = game.settings.spaceshipSpeed;       //Gaming
     }
 
     update (time, delta) {
