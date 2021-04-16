@@ -30,7 +30,7 @@ class Play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
         // add rocket (player 1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height/2 + 50, 'rocket').setOrigin(0.5, 0.5);
 
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6,  borderUISize*4,
             'spaceship', 0, 30).setOrigin(0, 0);
@@ -106,9 +106,9 @@ class Play extends Phaser.Scene {
             // update rocket
             this.p1Rocket.update(time, delta);
             //Update Spaceship
-            this.ship01.update(time, delta);
-            this.ship02.update(time, delta);
-            this.ship03.update(time, delta);
+            //this.ship01.update(time, delta);
+            //this.ship02.update(time, delta);
+            //this.ship03.update(time, delta);
         }
 
         //CheckCollision
@@ -156,4 +156,5 @@ class Play extends Phaser.Scene {
 
         this.sound.play('sfx_explosion');
     }
+
 }
