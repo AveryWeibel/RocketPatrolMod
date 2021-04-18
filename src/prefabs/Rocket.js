@@ -64,8 +64,8 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.x = game.config.width/2 + (this.polarRad * (Math.cos(this.polarAng)));
         this.y = game.config.height/2 + (this.polarRad * (Math.sin(this.polarAng)));
 
-        console.log("X:" + this.x);
-        console.log("Y:" + this.y);
+        //console.log("X:" + this.x);
+        //console.log("Y:" + this.y);
     }
 
     PolarSet(angle, dist) {
@@ -77,8 +77,8 @@ class Rocket extends Phaser.GameObjects.Sprite {
                 this.x = game.config.width/2 + (this.polarRad * (Math.cos(this.polarAng)));
                 this.y = game.config.height/2 + (this.polarRad * (Math.sin(this.polarAng)));
         
-                console.log("X:" + this.x);
-                console.log("Y:" + this.y);
+                //console.log("X:" + this.x);
+                //console.log("Y:" + this.y);
     }
 
     // reset rocket to "ground"
