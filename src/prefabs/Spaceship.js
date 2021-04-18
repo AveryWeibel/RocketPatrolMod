@@ -5,6 +5,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.points = pointValue;        // Store instance pointvalue
         this.rotateSpeed = Math.PI/128;   // radians per frame
         this.defaultDist = pRad;         // Default distance to rotate about center screen
+        this.resetSpeed = 0.5;           //Bool to control when ship flies back in
 
         //Initial conversion to polar coordinate system
         this.polarRad = Math.sqrt(Math.pow(game.config.width/2 - x, 2) + Math.pow(game.config.height/2 - y, 2));
@@ -20,7 +21,12 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 
         // Move spaceship
         //this.x -= this.moveSpeed * deltaMultiplier;
-        this.PolarTransformBy(this.rotateSpeed * deltaMultiplier, 0);
+        if (this.polarRad > this.defaultDist) {
+            this.PolarTransformBy(this.rotateSpeed * deltaMultiplier, -this.resetSpeed); //Move in from the edge of the screen 
+        }
+        else {
+            this.PolarTransformBy(this.rotateSpeed * deltaMultiplier, 0);  //Rotate at a fixed distance
+        }        
         //Wrap around from left to right edge
         //if(this.x  <= 0 - this.width) {
         //    this.reset();
@@ -36,8 +42,8 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.x = game.config.width/2 + (this.polarRad * (Math.cos(this.polarAng)));
         this.y = game.config.height/2 + (this.polarRad * (Math.sin(this.polarAng)));
 
-        console.log("X:" + this.x);
-        console.log("Y:" + this.y);
+        //console.log("X:" + this.x);
+        //console.log("Y:" + this.y);
     }
 
     PolarSet(angle, dist) {
@@ -49,13 +55,15 @@ class Spaceship extends Phaser.GameObjects.Sprite {
                 this.x = game.config.width/2 + (this.polarRad * (Math.cos(this.polarAng)));
                 this.y = game.config.height/2 + (this.polarRad * (Math.sin(this.polarAng)));
         
-                console.log("X:" + this.x);
-                console.log("Y:" + this.y);
+                //console.log("X:" + this.x);
+                //console.log("Y:" + this.y);
     }
 
     reset() {
         //this.x = game.config.width;
-        console.log("Reset ship");
+        //this.resetting = true;
+        this.PolarSet(0, 500);
+        //console.log("Reset ship");
 
     }
 }

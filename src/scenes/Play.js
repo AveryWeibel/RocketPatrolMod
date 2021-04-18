@@ -145,7 +145,7 @@ class Play extends Phaser.Scene {
         //Hide ship
         ship.alpha = 0;
         // Create explosion sprite on ship
-        let shipExplosion = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
+        let shipExplosion = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(.5,.5);
         shipExplosion.anims.play('explode');
         shipExplosion.on('animationcomplete', () => {
             ship.reset();
