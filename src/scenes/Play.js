@@ -22,7 +22,7 @@ class Play extends Phaser.Scene {
         this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'starfield').setOrigin(0, 0);
 
         // green UI background
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        //this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
         // white borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
@@ -66,15 +66,17 @@ class Play extends Phaser.Scene {
             fontSize: '24px',
             backgroundColor: '#F3B141',
             color: '#843605',
-            align: 'right',
+            align: 'center',
             padding: {
-                top: 5,
-                bottom: 5,                
+                top: 1,
+                bottom: 1,
+                left: 1,
+                right: 1            
             },
-            fixedWidth: 100
+            fixedWidth: 25
         }
 
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1score, scoreConfig);
+        this.scoreLeft = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, game.config.height/2 - scoreConfig.fixedWidth/2, this.p1score, scoreConfig);
 
         //GAMEOVER flag
         this.gameOver = false;
