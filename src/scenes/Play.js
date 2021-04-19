@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('foreground', './assets/H2OForeground.png');
         this.load.image('background', './assets/H2OBackground.png');
+        this.load.image('display', './assets/display.png');
         //Load spritesheet
         this.load.spritesheet('target', './assets/targetHydrogen.png', {
             frameWidth: 32,
@@ -20,11 +21,17 @@ class Play extends Phaser.Scene {
             startFrame: 0,
             endFrame: 5
         });
-        this.load.spritesheet('explosion', './assets/explosion.png', {
+        /*this.load.spritesheet('explosion', './assets/explosion.png', {
             frameWidth: 64,
             frameHeight: 32,
             startFrame: 0,
             endFrame: 9
+        });*/
+        this.load.spritesheet('hitSpriteSheet', './assets/HitAnim.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+            startFrame: 0,
+            endFrame: 11
         });
     }
 
@@ -44,13 +51,13 @@ class Play extends Phaser.Scene {
 
         // animation config
         this.anims.create({
-            key: 'explode',
-            frames: this.anims.generateFrameNumbers('explosion', { //Create frames object
+            key: 'hitTarget',
+            frames: this.anims.generateFrameNumbers('hitSpriteSheet', { //Create frames object
                 start: 0,
-                end: 9,
+                end: 11,
                 first: 0
             }),
-            frameRate: 30
+            frameRate: 12
         });
 
         this.anims.create({
@@ -103,26 +110,43 @@ class Play extends Phaser.Scene {
         // place foreground
         this.foreground = this.add.sprite(0, 0, 'foreground').setOrigin(0, 0);
 
+        //Place displays
+        this.displayScore = this.add.sprite(10, 2, 'display').setOrigin(0, 0);
+
         //init score
         this.p1score = 0;
 
         //Display score
         let scoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '24px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'center',
+            fontFamily: 'Segment7',
+            fontSize: '32px',
+            color: '#00FF00',
+            align: 'right',
             padding: {
                 top: 1,
                 bottom: 1,
                 left: 1,
                 right: 1            
             },
-            fixedWidth: 25
+            fixedWidth: 40
         }
 
-        this.scoreLeft = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, game.config.height/2 - scoreConfig.fixedWidth/2, this.p1score, scoreConfig);
+        let gameOverConfig = {
+            fontFamily: 'Segment7',
+            fontSize: '32px',
+            color: '#00FF00',
+            background: '#000000',
+            align: 'right',
+            padding: {
+                top: 1,
+                bottom: 1,
+                left: 1,
+                right: 1            
+            },
+            fixedWidth: 40
+        }
+
+        this.scoreLeft = this.add.text(50, 35, this.p1score, scoreConfig);
 
         //GAMEOVER flag
         this.gameOver = false;
@@ -191,8 +215,8 @@ class Play extends Phaser.Scene {
         //Hide ship
         ship.alpha = 0;
         // Create explosion sprite on ship
-        let shipExplosion = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(.5,.5);
-        shipExplosion.anims.play('explode');
+        let shipExplosion = this.add.sprite(ship.x, ship.y, 'hitSpriteSheet').setOrigin(.5,.5);
+        shipExplosion.anims.play('hitTarget');
         shipExplosion.on('animationcomplete', () => {
             ship.reset();
             ship.alpha = 1;
