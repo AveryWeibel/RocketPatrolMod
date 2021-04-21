@@ -3,7 +3,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);        // Add to existing scene
         this.points = pointValue;        // Store instance pointvalue
-        this.rotateSpeed = Math.PI/128;   // radians per frame
+        this.rotateSpeed = Math.PI/128 * game.settings.spaceshipSpeed;   // radians per frame
         this.defaultDist = pRad;         // Default distance to rotate about center screen
         this.resetSpeed = 0.5;           //Bool to control when ship flies back in
 

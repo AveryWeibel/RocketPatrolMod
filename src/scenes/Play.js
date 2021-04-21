@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
         this.load.image('foreground', './assets/H2OForeground.png');
         this.load.image('background', './assets/H2OBackground.png');
         this.load.image('display', './assets/display.png');
+        this.load.image('displayText', './assets/DisplayThing.png');
         //Load spritesheet
         this.load.spritesheet('target', './assets/targetHydrogen.png', {
             frameWidth: 32,
@@ -111,7 +112,10 @@ class Play extends Phaser.Scene {
         this.foreground = this.add.sprite(0, 0, 'foreground').setOrigin(0, 0);
 
         //Place displays
-        this.displayScore = this.add.sprite(10, 2, 'display').setOrigin(0, 0);
+        this.displayScore = this.add.sprite(55, 15, 'display').setOrigin(0, 0);
+
+        //Place displays
+        this.scoreLabel = this.add.sprite(10, 12, 'displayText').setOrigin(0, 0);
 
         //init score
         this.p1score = 0;
@@ -121,7 +125,7 @@ class Play extends Phaser.Scene {
             fontFamily: 'Segment7',
             fontSize: '32px',
             color: '#00FF00',
-            align: 'right',
+            align: 'left',
             padding: {
                 top: 1,
                 bottom: 1,
@@ -136,7 +140,7 @@ class Play extends Phaser.Scene {
             fontSize: '32px',
             color: '#00FF00',
             background: '#000000',
-            align: 'right',
+            align: 'center',
             padding: {
                 top: 1,
                 bottom: 1,
@@ -146,7 +150,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 40
         }
 
-        this.scoreLeft = this.add.text(50, 35, this.p1score, scoreConfig);
+        this.scoreLeft = this.add.text(60, 35, this.p1score, scoreConfig);
 
         //GAMEOVER flag
         this.gameOver = false;
