@@ -18,7 +18,7 @@ class Menu extends Phaser.Scene {
             endFrame: 7
         });
 
-        this.load.image('displayBig', './assets/displayBig.png');
+        this.load.image('displayBig', './assets/DisplayBig.png');
     }
 
     create() {

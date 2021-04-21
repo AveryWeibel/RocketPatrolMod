@@ -7,17 +7,17 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('foreground', './assets/H2OForeground.png');
         this.load.image('background', './assets/H2OBackground.png');
-        this.load.image('display', './assets/display.png');
+        this.load.image('display', './assets/Display.png');
         this.load.image('displayText', './assets/DisplayThing.png');
         this.load.image('centerIcon', './assets/centerIcon.png');
         //Load spritesheet
-        this.load.spritesheet('target', './assets/targetHydrogen.png', {
+        this.load.spritesheet('target', './assets/TargetHydrogen.png', {
             frameWidth: 32,
             frameHeight: 32,
             startFrame: 0,
             endFrame: 7
         });
-        this.load.spritesheet('player', './assets/playerOxygen.png', {
+        this.load.spritesheet('player', './assets/PlayerOxygen.png', {
             frameWidth: 32,
             frameHeight: 32,
             startFrame: 0,
