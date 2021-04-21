@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         this.load.image('background', './assets/H2OBackground.png');
         this.load.image('display', './assets/display.png');
         this.load.image('displayText', './assets/DisplayThing.png');
+        this.load.image('centerIcon', './assets/centerIcon.png');
         //Load spritesheet
         this.load.spritesheet('target', './assets/targetHydrogen.png', {
             frameWidth: 32,
@@ -83,6 +84,8 @@ class Play extends Phaser.Scene {
             frameRate: 11,
             repeat: -1
         });
+
+        this.centerIcon = this.add.sprite(game.config.width/2, game.config.height/2, 'centerIcon');
 
         // add rocket (player 1)
         this.player = new Rocket(this, game.config.width/2, game.config.height/2, 'player', 0).setOrigin(0.5, 0.5);
@@ -161,8 +164,8 @@ class Play extends Phaser.Scene {
 
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer * 1000, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or (M) for Menu', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 - 112, 'GAME OVER', scoreConfig).setOrigin(.5, 1);
+            this.add.text(game.config.width/2, game.config.height/2-48, 'Press (R) to Restart or (M) for Menu', scoreConfig).setOrigin(.5, 1);
             this.gameOver = true;
         }, null, this);
 
