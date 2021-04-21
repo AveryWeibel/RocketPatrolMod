@@ -14,6 +14,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 
         //Move player to starting position
         this.PolarSet(pAng, this.defaultDist);
+        this.randomizeDirection();
     }
 
     update (time, delta) {
@@ -62,8 +63,16 @@ class Spaceship extends Phaser.GameObjects.Sprite {
     reset() {
         //this.x = game.config.width;
         //this.resetting = true;
+        this.randomizeDirection();
         this.PolarSet(0, 500);
         //console.log("Reset ship");
 
+    }
+
+    randomizeDirection() {
+        let dirs = [-1, 1];
+        let newDir = dirs[Math.floor((Math.random() * 2))];
+        console.log(newDir);
+        this.rotateSpeed *= newDir;
     }
 }
