@@ -72,7 +72,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
     randomizeDirection() {
         let dirs = [-1, 1];
         let newDir = dirs[Math.floor((Math.random() * 2))];
-        console.log(newDir);
+        //console.log(newDir);
         this.rotateSpeed *= newDir;
     }
 }
