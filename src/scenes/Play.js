@@ -115,7 +115,7 @@ class Play extends Phaser.Scene {
         this.displayScore = this.add.sprite(55, 15, 'display').setOrigin(0, 0);
 
         //Place displays
-        this.scoreLabel = this.add.sprite(10, 12, 'displayText').setOrigin(0, 0);
+        this.scoreLabel = this.add.sprite(10, 6, 'displayText').setOrigin(0, 0);
 
         //init score
         this.p1score = 0;
@@ -150,7 +150,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 40
         }
 
-        this.scoreLeft = this.add.text(60, 35, this.p1score, scoreConfig);
+        this.scoreLeft = this.add.text(60, 33, this.p1score, scoreConfig);
 
         //GAMEOVER flag
         this.gameOver = false;
