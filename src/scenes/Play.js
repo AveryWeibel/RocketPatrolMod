@@ -38,7 +38,6 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
         // green UI background
         //this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
 
@@ -117,15 +116,16 @@ class Play extends Phaser.Scene {
 
         //Place displays
         this.displayScore = this.add.sprite(55, 15, 'display').setOrigin(0, 0);
-
-        //Place displays
+        this.displayClock = this.add.sprite(525, 15, 'display').setOrigin(0, 0);
         this.scoreLabel = this.add.sprite(10, 6, 'displayText').setOrigin(0, 0);
 
         //init score
         this.p1score = 0;
+        //init clock
+        this.clockValue = game.settings.gameTimer;
 
         //Display score
-        let scoreConfig = {
+        let gameUIConfig = {
             fontFamily: 'Segment7',
             fontSize: '32px',
             color: '#00FF00',
@@ -139,35 +139,43 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         }
 
-        let gameOverConfig = {
-            fontFamily: 'Segment7',
-            fontSize: '32px',
-            color: '#00FF00',
-            background: '#000000',
-            align: 'center',
-            padding: {
-                top: 1,
-                bottom: 1,
-                left: 1,
-                right: 1            
-            },
-            fixedWidth: 40
-        }
+        //Place text
+        this.scoreLeft = this.add.text(60, 33, this.p1score, gameUIConfig);
+        this.clockRight = this.add.text(530, 33, this.clockValue, gameUIConfig);
+        
 
-        this.scoreLeft = this.add.text(60, 33, this.p1score, scoreConfig);
 
         //GAMEOVER flag
         this.gameOver = false;
 
-        // clock
-        this.gameLen = 60; //Game length in seconds
+        //Bind callback for use in clock event
+        let clockUpdate = function() {
+            //console.log("gameover");    
+            if (this.clockValue > 0) {
+                this.clockValue -= 1;
+                this.clockRight.text = this.clockValue;
+            }
+            else {   
+                this.add.text(game.config.width/2, game.config.height/2 - 112, 'GAME OVER', gameUIConfig).setOrigin(.5, 1);
+                this.add.text(game.config.width/2, game.config.height/2-48, 'Press (R) to Restart or (M) for Menu', gameUIConfig).setOrigin(.5, 1);
+                this.gameOver = true;
+                this.time.removeEvent(clockUpdateEvent);
+            }
+        }
+        
+        //Config for clock event
+        let clockUpdateConfig = {
+            callback: clockUpdate,
+            delay: 1000,
+            loop: true,
+            callbackScope: this
+        }
 
-        scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(game.settings.gameTimer * 1000, () => {
-            this.add.text(game.config.width/2, game.config.height/2 - 112, 'GAME OVER', scoreConfig).setOrigin(.5, 1);
-            this.add.text(game.config.width/2, game.config.height/2-48, 'Press (R) to Restart or (M) for Menu', scoreConfig).setOrigin(.5, 1);
-            this.gameOver = true;
-        }, null, this);
+        //Create clock event
+        let clockUpdateEvent = new Phaser.Time.TimerEvent(clockUpdateConfig);
+
+        //Begin calling event
+        this.time.addEvent(clockUpdateEvent)
 
     } //End create()
 
@@ -236,5 +244,7 @@ class Play extends Phaser.Scene {
 
         this.sound.play('sfx_explosion');
     }
+
+
 
 }
