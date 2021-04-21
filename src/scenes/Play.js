@@ -176,6 +176,20 @@ class Play extends Phaser.Scene {
         //Begin calling event
         this.time.addEvent(clockUpdateEvent)
 
+        let musicConfig = {
+            mute: false,
+            volume: .65,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+
+        this.sound.stopAll();
+        this.music = this.sound.add('music', musicConfig);
+        this.music.play();
+
     } //End create()
 
     update(time, delta) {

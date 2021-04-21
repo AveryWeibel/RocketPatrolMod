@@ -6,8 +6,10 @@ class Menu extends Phaser.Scene {
     preload() {
         //load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/explosion38.wav');
+        this.load.audio('sfx_explosion', './assets/TargetHitSound.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.audio('music', './assets/BGMusic.wav');
+        this.load.audio('musicMenu', './assets/BGMusicMenu.wav');
 
         this.load.spritesheet('MMSpriteSheet', './assets/MainMenuAnim.png', {
             frameWidth: 640,
@@ -64,6 +66,21 @@ class Menu extends Phaser.Scene {
         // define keys
         keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
         keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
+
+        let musicConfig = {
+            mute: false,
+            volume: .65,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+
+
+        this.sound.stopAll();
+        this.music = this.sound.add('musicMenu', musicConfig);
+        this.music.play();
 
     } //End create()
 
