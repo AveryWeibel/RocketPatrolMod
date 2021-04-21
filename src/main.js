@@ -4,7 +4,7 @@
 //Rocket Patrol Mod
 //4/21/21
 
-//FULL MOD TIME: 13.25hrs
+//FULL MOD TIME: 13.75hrs
 
 //Initial polar coordinate movement - 3 hrs
 //Firing and reset - 1hr
@@ -19,6 +19,7 @@
 //Timer functionality 1.5hrs\
 //New sounds - .75hrs
 //New music - 1hr
+//Panic because the game doesnt work on pages because of case sensitivity - .5hrs
 
 //Score: Polar gameplay 30
 //       Art overhaul (Molecule Combination/Mars Base Theme) 60
