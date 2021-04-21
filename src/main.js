@@ -28,6 +28,11 @@
 //       Enemies randomized direction 5
 //       New animated sprite for enemies 10 (The art overhaul doesn't say animated sprite so seems like thats added)
 
+//Shout out to the phaser API docs, you were more helpful than I gave you credit for
+//Great font https://www.dafont.com/seven-segment.font
+//Great article on changing the font https://learn.yorkcs.com/2019/09/28/phaser-3-basics-custom-fonts/
+
+
 /********************** */
 
 // game configuration
