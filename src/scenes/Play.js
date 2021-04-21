@@ -152,8 +152,7 @@ class Play extends Phaser.Scene {
         let clockUpdate = function() {
             //console.log("gameover");    
             if (this.clockValue > 0) {
-                this.clockValue -= 1;
-                this.clockRight.text = this.clockValue;
+                this.UpdateClock(-1);               
             }
             else {   
                 this.add.text(game.config.width/2, game.config.height/2 - 112, 'GAME OVER', gameUIConfig).setOrigin(.5, 1);
@@ -240,11 +239,15 @@ class Play extends Phaser.Scene {
         });
         //Do sscoring for hit
         this.p1score += ship.points;
+        this.UpdateClock(1);
         this.scoreLeft.text = this.p1score;
 
         this.sound.play('sfx_explosion');
     }
 
-
+    UpdateClock(increment) {
+        this.clockValue += increment;
+        this.clockRight.text = this.clockValue;
+    }
 
 }
